@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// call the main view home
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('home');
 });
 
 Route::get('/dashboard', function () {
@@ -25,4 +26,10 @@ require __DIR__.'/auth.php';
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//change to call controller BooksController
+Route::get('/home', [App\Http\Controllers\BooksController::class, 'index'])->name('home');
+
+//api to query information using ajax
+Route::get('/api/books', [App\Http\Controllers\BooksController::class, 'api'])->name('api.books');
+
+
