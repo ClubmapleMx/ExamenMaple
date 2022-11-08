@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Books;
 use Illuminate\Http\Request;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Yajra\DataTables\Html\Button;
+use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\Services\DataTable;
 
 class BooksController extends Controller
 {
@@ -29,7 +35,10 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //
+        //$books = Books::select('id', 'title', 'category', 'author', 'realease_date', 'publish_date')->get();
+
+        // only return de view
+        return view('home');
     }
 
     /**
@@ -37,6 +46,10 @@ class BooksController extends Controller
      */
     public function api(Request $request)
     {
-        // 
+        // query to Books table through the model
+        $books = Books::select('id', 'title', 'category', 'author', 'realease_date', 'publish_date')->get();
+
+        // to Json install package of oracle data table
+        return  datatables()->collection(Books::all())->toJson();
     }
 }
