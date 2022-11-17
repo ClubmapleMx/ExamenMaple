@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BookResource;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -9,7 +11,7 @@ class BooksController extends Controller
 
     /**
      * INSTRUCTIONS
-     * 
+     *
      * - Clone this repository into a new one
      * - Create the Books Model with Migrations, Factory and Seeder
      * - Table books columns: id,title,category,author,realease_date,publish_date
@@ -20,7 +22,7 @@ class BooksController extends Controller
      * - Extra points for bootstrap 4 styling
      * - Push your changes into your new repository in Github
      * - Share your github URL
-     * 
+     *
      */
 
 
@@ -29,7 +31,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //
+        return view('welcome');
     }
 
     /**
@@ -37,6 +39,7 @@ class BooksController extends Controller
      */
     public function api(Request $request)
     {
-        // 
+        $books = Book::all();
+        return BookResource::collection($books);
     }
 }
